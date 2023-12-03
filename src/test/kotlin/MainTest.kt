@@ -17,7 +17,7 @@ class MainTest {
     @Test
     fun testValidation() {
         val codeBreaker = CodeBreaker()
-        assertThrows<Exception> { codeBreaker.decryptLine("noDigits") }
+        assertEquals(0, codeBreaker.decryptLine("noDigits"))
     }
 
     @Test
@@ -47,6 +47,23 @@ class MainTest {
         """.trimIndent()
 
         assertEquals(11 + 22 + 31 + 12 + 15 + 77 + 63, codeBreaker.decryptText(inputText))
+    }
+
+    @Test
+    fun testGetValueFromTextWhereThereAreWords() {
+        val codeBreaker = CodeBreaker()
+
+        val inputText = """
+            two1nine
+            eightwothree
+            abcone2threexyz
+            xtwone3four
+            4nineeightseven2
+            zoneight234
+            7pqrstsixteen
+        """.trimIndent()
+
+        assertEquals(29 + 83 + 13 + 24 + 42 + 14 + 76, codeBreaker.decryptText(inputText))
     }
 
 }
